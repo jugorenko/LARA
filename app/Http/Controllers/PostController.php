@@ -8,7 +8,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $name = 'AVOKADO !';
+        $name = 'AVOKADO!';
         return view('hello', [
             'name' => $name,
         ]);
