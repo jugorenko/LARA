@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Models\Fastfood;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -28,7 +29,14 @@ Route::get('/hello', [PostController::class, 'index']);
 
 Route::get('/greetings', function () {
     $name = 'orange';
-    return view('greetings',[
+    return view('greetings' , [
         'name'=> $name,
     ]);
+});
+
+//--just added my own fasfood model
+
+Route::get('/fastfood', function () {
+    $posts = Post::get();
+    dd($posts);
 });
