@@ -10,7 +10,7 @@ class PostController extends Controller
     {
         $name = 'AVOKADO!';
         return view('hello', [
-            'name' => $name,
+            // 'name' => $name,
         ]);
     }
 }

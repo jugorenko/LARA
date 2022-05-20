@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/posts', function () {
+    $posts = Post::get();
+    dd($posts);
+});
+
 Route::get('/hello', [PostController::class, 'index']);
+
+Route::get('/greetings', function () {
+    $name = 'orange';
+    return view('greetings',[
+        'name'=> $name,
+    ]);
+});
