@@ -20,23 +20,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', function () {
-    $posts = Post::get();
-    dd($posts);
-});
+//Route::get('/posts',[PostController::class,'index']);
 
 Route::get('/hello', [PostController::class, 'index']);
 
-Route::get('/greetings', function () {
-    $name = 'orange';
-    return view('greetings' , [
-        'name'=> $name,
-    ]);
-});
+// Route::get('/greetings', function () {
+//     $name = 'orange';
+//     return view('greetings' , [
+//         'name'=> $name,
+//     ]);
+// });
 
 //--just added my own fasfood model
 
-Route::get('/fastfood', function () {
-    $posts = Post::get();
-    dd($posts);
+// Route::get('/fastfood', function () {
+//     $posts = Post::get();
+//     dd($posts);
+// });
+
+Route::controller(PostController::class)->group(function(){
+    Route::prefix('posts')->group(function() {
+        Route::get('/','index')->name('posts.index');
+        Route::get('/create', 'create')->name('posts.create');
+        Route::post('/create', 'store')->name('posts.store');
+        Route::get('/edit/{post}','edit')->name('posts.edit');
+        Route::post('/edit/{post}','update')->name('posts.update');
+        Route::get('/show/{post}','show')->name('posts.show');
+        Route::get('/destroy/{post}','destroy')->name('posts.destroy');
+    });
 });

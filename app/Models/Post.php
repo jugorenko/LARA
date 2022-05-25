@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,17 +17,22 @@ class Post extends Model
     ];
 
     // protected $table='posts';
-}
 
-class Fastfood extends Model
+
+    protected static function newFactory():PostFactory
 {
-    use HasFactory;
+    return new PostFactory();
+}
+// class Fastfood extends Model
+// {
+//     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'body',
-        'author_name',
-    ];
+//     protected $fillable = [
+//         'title',
+//         'body',
+//         'author_name',
+//     ];
 
-    // protected $table='posts';
+//     // protected $table='posts';
+// }
 }
