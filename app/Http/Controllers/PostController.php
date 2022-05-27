@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
 
 use Illuminate\Http\Request;
@@ -22,15 +25,25 @@ class PostController extends Controller
 
    }
 
-   public function store(Request $request)
+   public function store(PostCreateRequest $request)
    {
        //dd($request);
-       $requestData = $request->all();
+
+       $validatedData = $request->validated([
+            // 'title' => 'required|unique:posts|max:255',
+            // 'body' => 'required',
+            // 'author_name' => 'nullable',
+       ]);
+
+    //    $requestData = $request->all();
+      // dd($validatedData);
+
+      $validatedData = $request->validated();
 
        $post = Post::create([
-           'title' => $requestData['title'],
-           'body' => $requestData['body'],
-           'author_name' => $requestData['author_name'],
+           'title' => $validatedData['title'],
+           'body' => $validatedData['body'],
+           'author_name' => $validatedData['author_name'],
        ]);
 
        $post->save();
@@ -55,13 +68,20 @@ class PostController extends Controller
        ]);
    }
 
-   public function update(Request $request, Post $post)
+   public function update(PostUpdateRequest $request, Post $post)
    {
-       $requestData = $request->all();
+    $validatedData = $request->validated();
+        // 'title' => 'required|max:255',
+        // 'body' => 'required',
+        // 'author_name' => 'nullable',
+   
 
-       $post->title = $requestData['title'];
-       $post->body = $requestData['body'];
-       $post->author_name = $requestData['author_name'];
+    
+      // $requestData = $request->all();
+
+       $post->title = $validatedData['title'];
+       $post->body = $validatedData['body'];
+       $post->author_name = $validatedData['author_name'];
 
        $post ->save();
 
