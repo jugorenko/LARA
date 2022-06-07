@@ -2,7 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\HasLocale;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Support\Facades\Hash;
 
 class Kernel extends HttpKernel
 {
@@ -63,5 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        'isAdmin' => IsAdmin::class,
+        'hasLocale' => HasLocale::class,
     ];
 }
